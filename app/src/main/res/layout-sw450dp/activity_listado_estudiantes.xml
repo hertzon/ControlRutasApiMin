@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context="com.coltrack.controlrutasapimin.ListadoEstudiantes">
+
+    <RelativeLayout
+        android:layout_width="400dp"
+        android:layout_height="match_parent"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="Listado de Estudiantes"
+            android:id="@+id/titulo"
+            android:textSize="26dp"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:textColor="#3290d7" />
+
+        <ExpandableListView
+            android:id="@+id/lvExp"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_weight="0.09"
+            android:choiceMode="singleChoice"
+            android:textAlignment="center"
+            android:layout_below="@+id/txtViewSeleccioneAccion"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" />
+        <ExpandableListView
+            android:id="@+id/lvExp1"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_weight="0.09"
+            android:choiceMode="singleChoice"
+            android:textAlignment="center"
+            android:layout_below="@+id/lvExp"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="Estudiante Seleccionado:"
+            android:id="@+id/testudianteSeleccionado"
+            android:layout_below="@+id/lvExp1"
+
+            android:layout_marginTop="5dp"
+            android:textSize="20dp"
+            android:textColor="#3290d7" />
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/editText_estudianteSeleccionado"
+            android:layout_below="@+id/testudianteSeleccionado" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:id="@+id/textView8"
+            android:layout_below="@+id/editText_estudianteSeleccionado"
+            android:textSize="20dp"
+            android:textColor="#3290d7"
+            android:text="Grado:" />
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/editText_gradoEstudiante"
+            android:layout_below="@+id/textView8" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="Movil Acudiente:"
+            android:id="@+id/textView9"
+            android:layout_below="@+id/editText_gradoEstudiante"
+            android:textSize="20dp"
+            android:textColor="#3290d7" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="Eventos"
+            android:id="@+id/textView10"
+            android:textSize="20dp"
+            android:textColor="#3290d7"
+            android:layout_below="@+id/editText_telefonoAcudiente"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="13dp" />
+
+        <Button
+
+            android:text="Bajo Ruta"
+            android:id="@+id/button_bajo"
+            android:textSize="16dp"
+            android:layout_width="match_parent"
+            android:textColor="#3290d7"
+            android:background="#ffc600"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/button_subio"
+            android:layout_marginTop="15dp" />
+
+        <Button
+
+            android:text="Llamar Acudiente"
+            android:id="@+id/llamarAcudiente"
+            android:textSize="16dp"
+            android:layout_width="match_parent"
+            android:textColor="#3290d7"
+            android:background="#ffc600"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:layout_below="@+id/button_bajo"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" />
+
+        <Button
+
+            android:text="Subio Ruta"
+            android:id="@+id/button_subio"
+            android:textSize="16sp"
+            android:textColor="#3290d7"
+            android:background="#ffc600"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/textView10"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_marginTop="15dp" />
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/editText_telefonoAcudiente"
+
+            android:layout_below="@+id/textView9"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" />
+
+        <Button
+            android:text="Cargar Estudiantes Servidor"
+            android:id="@+id/buttonCargarDB"
+            android:textSize="16dp"
+            android:layout_width="match_parent"
+            android:textColor="#3290d7"
+            android:background="#ffc600"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:layout_below="@+id/llamarAcudiente"
+            android:layout_centerHorizontal="true" />
+
+        <Button
+            android:text="Novedades"
+            android:id="@+id/btnNovedades"
+            android:textSize="16dp"
+            android:layout_width="match_parent"
+            android:textColor="#3290d7"
+            android:background="#ffc600"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:layout_below="@+id/buttonCargarDB"
+            android:layout_centerHorizontal="true" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="Seleccione accion:"
+            android:id="@+id/txtViewSeleccioneAccion"
+            android:textSize="22dp"
+            android:textColor="#3290d7"
+            android:layout_below="@+id/titulo"
+            android:layout_centerHorizontal="true" />
+
+
+    </RelativeLayout>
+
+
+
+
+</RelativeLayout>

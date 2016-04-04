@@ -1,6 +1,7 @@
 package com.coltrack.controlrutasapimin;
 
 import android.app.ActionBar;
+import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.database.Cursor;
@@ -59,12 +60,17 @@ public class MainActivity extends AppCompatActivity {
             StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
             StrictMode.setThreadPolicy(policy);
         }
-
         setContentView(R.layout.activity_main);
+        this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
+
         editTextUsuario=(EditText)findViewById(R.id.editTextUsuario);
         editTextPassword=(EditText)findViewById(R.id.editTextPassword);
         editTextRuta=(EditText)findViewById(R.id.editTextRuta);
         buttonIngresar=(Button)findViewById(R.id.buttonIngresar);
+
+        new GPSTracker(MainActivity.this);
+        double latitude  = GPSTracker.latitude; // latitude
+        double longitude = GPSTracker.latitude; // latitude
 
         buttonIngresar.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -184,14 +190,15 @@ public class MainActivity extends AppCompatActivity {
                 }
                 if (response.equals("1")){
                     //Toast.makeText(MainActivity.this,"Bienvenido!",Toast.LENGTH_SHORT).show();
-                   Intent i=new Intent(getApplicationContext(),ListadoEstudiantes.class);i.putExtra("usuario",strUsuario);
-                   i.putExtra("ruta", strRuta);
+                    Intent i=new Intent(getApplicationContext(),ListadoEstudiantes.class);
+                    i.putExtra("usuario",strUsuario);
+                    i.putExtra("ruta", strRuta);
                     status=true;
-                   try {
+                    try {
                         Thread.sleep(100);
-                   } catch (InterruptedException e) {
+                    } catch (InterruptedException e) {
                         e.printStackTrace();
-                   }
+                    }
                     startActivity(i);
                 }
 
@@ -224,21 +231,12 @@ public class MainActivity extends AppCompatActivity {
                         e.printStackTrace();
                         Log.d(LOGTAG, "Error1:" + e);
                     }
-
-                    //String name = object.getString("nombre");
-//                HttpEntity httpEntity = httpResponse.getEntity();
-//                response = EntityUtils.toString(httpEntity);
-
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
             } catch (UnsupportedEncodingException e) {
                 e.printStackTrace();
             }
-            //Log.d(LOGTAG, "POST Server Response >>> " + response);
-
-
-
             return response;
         }
         private StringBuilder inputStreamToString(InputStream is)

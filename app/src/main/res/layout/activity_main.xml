@@ -23,26 +23,28 @@
             android:text="Bienvenido"
             android:id="@+id/textView"
             android:textColor="#3290d7"
-            android:layout_below="@+id/imageView"
+            android:textSize="20dp"
+            android:layout_above="@+id/editTextUsuario"
             android:layout_centerHorizontal="true" />
 
         <ImageView
             android:layout_width="200dp"
             android:layout_height="150dp"
             android:id="@+id/imageView"
-            android:background="@mipmap/schoolbus"
+            android:background="@drawable/schoolbus"
             android:layout_below="@+id/textView2"
             android:layout_centerHorizontal="true" />
 
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:text="Control de Rutas Escolares"
             android:id="@+id/textViewTitle"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="5dp"
-            android:textColor="#3290d7" />
+            android:textColor="#3290d7"
+            android:textSize="25dp" />
 
         <EditText
             android:layout_width="match_parent"
@@ -53,7 +55,8 @@
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
             android:singleLine="true"
-            android:textColorHint="#c2c2c3" />
+            android:textColorHint="#c2c2c3"
+            android:textSize="20dp" />
 
         <EditText
             android:layout_width="wrap_content"
@@ -69,7 +72,8 @@
             android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true"
             android:hint="CONSTRASEÑA"
-            android:textColorHint="#c2c2c3" />
+            android:textColorHint="#c2c2c3"
+            android:textSize="20dp" />
 
         <EditText
             android:layout_width="wrap_content"
@@ -83,7 +87,8 @@
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
             android:hint="RUTA"
-            android:textColorHint="#c2c2c3" />
+            android:textColorHint="#c2c2c3"
+            android:textSize="20dp" />
 
         <Button
             android:layout_width="wrap_content"
@@ -91,7 +96,7 @@
             android:text="INGRESAR"
             android:id="@+id/buttonIngresar"
             android:layout_below="@+id/editTextRuta"
-            android:layout_marginTop="40dp"
+            android:layout_marginTop="25dp"
             android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true"
             android:layout_alignParentLeft="true"
