@@ -44,8 +44,10 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
 import java.text.DecimalFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.regex.Pattern;
@@ -101,6 +103,7 @@ public class ListadoEstudiantes extends AppCompatActivity {
     int ano=0;
     int hora=0;
     int minuto=0;
+    String usuario;
 
 
 
@@ -152,7 +155,7 @@ public class ListadoEstudiantes extends AppCompatActivity {
         hideControls(true);
 
         Bundle bundle=getIntent().getExtras();
-        String usuario=bundle.getString("usuario").toString();
+        usuario=bundle.getString("usuario").toString();
         ruta=bundle.getString("ruta").toString();
         Log.d(LOGTAG, "usuario rx: " + usuario);
         Log.d(LOGTAG, "ruta rx: " + ruta);
@@ -214,87 +217,6 @@ public class ListadoEstudiantes extends AppCompatActivity {
         });
 
         myDB = this.openOrCreateDatabase("estudiantesRenetur", MODE_PRIVATE, null);
-
-
-
-//        final JSONObject jsonObject = new JSONObject();
-//        try {
-//            jsonObject.put("ruta", ruta);
-//            List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
-//            nameValuePairs.add(new BasicNameValuePair("json", jsonObject.toString()));
-//
-//            HttpClient httpClient = new DefaultHttpClient();
-//            //HttpPost httpPost = new HttpPost("http://107.170.38.31/phpDir/holaphp.php");
-//            HttpPost httpPost = new HttpPost("http://107.170.38.31/phpDir/apiEstudiantesRenetur1.php");
-//
-//            try {
-//                httpPost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
-//            } catch (UnsupportedEncodingException e) {
-//                e.printStackTrace();
-//            }
-//            try {
-//                HttpResponse httpResponse = httpClient.execute(httpPost);
-//                String jsonResult = inputStreamToString(httpResponse.getEntity().getContent()).toString();
-//                Log.d(LOGTAG, "jsonResult: " + jsonResult);
-//                String json=jsonResult;
-//                json=json.replace("[", "");
-//                json=json.replace("]", "");
-//
-//                int nrows=countOccurrences(json, '{');
-//                Log.d(LOGTAG, "nrows: " + nrows);
-//                String[]parts=json.split(Pattern.quote("}"));
-//                Log.d(LOGTAG,"Creando DB...");
-//                //SQLiteDatabase myDB = this.openOrCreateDatabase("DatabaseName", MODE_PRIVATE, null);
-//                myDB = this.openOrCreateDatabase("estudiantesRenetur", MODE_PRIVATE, null);
-//                myDB.execSQL("DROP TABLE IF EXISTS estudiantes");//borramos tabla
-//
-//                myDB.execSQL("CREATE TABLE IF NOT EXISTS "
-//                        + "estudiantes"
-//                        + " (nombre TEXT, grado TEXT, nombreAcudiente TEXT, telefonoAcudiente TEXT, correoAcudiente TEXT, subio TEXT, ruta TEXT);");
-//                for (int i=0;i<nrows;i++){
-//                    parts[i]=parts[i].replace("{", "");
-//                    if (i>0){
-//                        parts[i]=parts[i].substring(1);
-//                    }
-//                    parts[i]=parts[i].replace("\"", "");
-//                    Log.d(LOGTAG, "Parte: " + i + ":" + parts[i]);
-//                    String[] partes=parts[i].split(Pattern.quote(","));
-//                    String nombre=null;
-//                    String grado=null;
-//                    String nombreAcudiente=null;
-//                    String telefonoAcudiente=null;
-//                    String correoAcudiente=null;
-//                    for (int j=0;j<partes.length;j++){                        String[] subParts=partes[j].split(Pattern.quote(":"));
-//                        Log.d(LOGTAG, "subparte " + j + ":" + subParts[1]);
-//                        switch (j){
-//                            case 0:
-//                                nombre=subParts[1];
-//                                break;
-//                            case 1:
-//                                grado=subParts[1];
-//                                break;
-//                            case 2:
-//                                telefonoAcudiente=subParts[1];
-//                                break;
-//                            case 3:
-//                                nombreAcudiente=subParts[1];
-//                                break;
-//                            case 4:
-//                                correoAcudiente=subParts[1];
-//                                break;
-//                        }
-//                    }
-//                    myDB.execSQL("INSERT INTO "
-//                            + "estudiantes"
-//                            + " (nombre, grado, nombreAcudiente, telefonoAcudiente, correoAcudiente, subio, ruta)"
-//                            + " VALUES ("+"'"+ nombre+"'" + ", "+"'"+grado+"'"+", "+"'"+nombreAcudiente+"'"+", "+"'"+telefonoAcudiente+"'"+", "+"'"+correoAcudiente +"'"+", "+"'"+"NO" +"'"+", "+"'"+ruta+"'"+");");
-//                }
-//            } catch (IOException e) {
-//                e.printStackTrace();
-//            }
-//        } catch (JSONException e) {
-//            e.printStackTrace();
-//        }
         top250 = new ArrayList<String>();
         top251 = new ArrayList<String>();
         pupulateItems();
@@ -673,7 +595,7 @@ public class ListadoEstudiantes extends AppCompatActivity {
         private ProgressDialog pd;
         @Override
         protected void onPreExecute() {
-            pd = ProgressDialog.show(ListadoEstudiantes.this, "Enviando Correo a acudiente", "Conectando...");
+            pd = ProgressDialog.show(ListadoEstudiantes.this, "Enviando Notificacion", "Conectando...");
             Log.d(LOGTAG, "pre  execute");
         }
         @Override
@@ -702,7 +624,30 @@ public class ListadoEstudiantes extends AppCompatActivity {
 
                 jsonObject.put("asunto",asunto);
                 jsonObject.put("cuerpoMensaje",cuerpoMensaje);
-                Log.d(LOGTAG,"Enviando datos de mail a servidor....");
+                //notificaciones de eventos:
+                Log.d(LOGTAG,"Usuario: "+usuario);
+                jsonObject.put("usuario",usuario);
+                jsonObject.put("ruta",ruta);
+                jsonObject.put("nombreEstudiante",estudiante);
+                if (tipoAccion==1) {
+                    jsonObject.put("evento", "subio");
+                }
+                if (tipoAccion==2) {
+                    jsonObject.put("evento", "bajo");
+                }
+                jsonObject.put("latitud",strLatitud);
+                jsonObject.put("longitud",strLongitud);
+                //SimpleDateFormat sdf = new SimpleDateFormat("MM-dd-yyyy HH:mm");
+                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                String currentDateandTime = sdf.format(new Date());
+                Log.d(LOGTAG, "date: " + currentDateandTime);
+                jsonObject.put("date",currentDateandTime);
+
+
+
+
+
+                Log.d(LOGTAG,"Enviando datos de subida a servidor....");
                 List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
                 nameValuePairs.add(new BasicNameValuePair("json", jsonObject.toString()));
                 String response = makePOSTRequest("http://107.170.38.31/phpDir/sendmail.php", nameValuePairs );
@@ -735,7 +680,7 @@ public class ListadoEstudiantes extends AppCompatActivity {
                     }
                 });
             }else {
-                Toast.makeText(ListadoEstudiantes.this,"Correo enviado correctamente!",Toast.LENGTH_SHORT).show();
+                Toast.makeText(ListadoEstudiantes.this,"Notificacion enviada correctamente!",Toast.LENGTH_SHORT).show();
                 subio.setEnabled(false);bajo.setEnabled(false);
             }
         }
