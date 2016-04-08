@@ -32,8 +32,10 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
 import java.text.DecimalFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -67,6 +69,10 @@ public class eventos extends AppCompatActivity{
     String cuerpoMensaje=null;
     EditText editTextEvento;
     String asunto;
+    String usuario;
+    String strLatitud;
+    String strLongitud;
+    String novedad;
 
 
 
@@ -99,6 +105,9 @@ public class eventos extends AppCompatActivity{
         fecha=bundle.getString("fecha");
         strHora=bundle.getString("hora");
         posicion=bundle.getString("posicion");
+        usuario=bundle.getString("usuario");
+        strLatitud=bundle.getString("strLatitud");
+        strLongitud=bundle.getString("strLongitud");
 
 
         Log.d(LOGTAG, "Datos que llegan al activity:");
@@ -116,6 +125,7 @@ public class eventos extends AppCompatActivity{
                 evento = evento + " enfermedad ";
                 evento = evento + "a las " + strHora + " del " + fecha + " en la posicion " + posicion;
                 editTxt.setText(evento);
+                novedad="enfermedad";
             }
         });
 
@@ -127,6 +137,7 @@ public class eventos extends AppCompatActivity{
                 evento=evento+" ausente o no abordo ";
                 evento=evento+ "a las "+strHora+" del "+fecha+" en la posicion "+posicion;
                 editTxt.setText(evento);
+                novedad="ausente o no abordo";
             }
         });
         rBtnOtraRuta.setOnClickListener(new View.OnClickListener() {
@@ -137,6 +148,7 @@ public class eventos extends AppCompatActivity{
                 evento=evento+" abordo otra ruta      ";
                 evento=evento+ "a las "+strHora+" del "+fecha+" en la posicion "+posicion;
                 editTxt.setText(evento);
+                novedad="abordo otra ruta";
             }
         });
 
@@ -196,11 +208,25 @@ public class eventos extends AppCompatActivity{
                 asunto="Novedad: estudiante "+estudiante+" "+dia+"/"+mes+"/"+ano+" "+hora+":"+minuto;
                 jsonObject.put("asunto",asunto);
                 jsonObject.put("cuerpoMensaje",evento);
-                Log.d(LOGTAG,"Enviando datos de mail a servidor....");
+
+                //datos para los eventos
+                jsonObject.put("usuario",usuario);
+                jsonObject.put("ruta",ruta);
+                jsonObject.put("nombreEstudiante",estudiante);
+                jsonObject.put("evento", novedad);
+                jsonObject.put("latitud",strLatitud);
+                jsonObject.put("longitud",strLongitud);
+                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                String currentDateandTime = sdf.format(new Date());
+                Log.d(LOGTAG, "date: " + currentDateandTime);
+                jsonObject.put("date",currentDateandTime);
+
+
+                Log.d(LOGTAG, "Enviando datos de mail a servidor....");
                 List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
                 nameValuePairs.add(new BasicNameValuePair("json", jsonObject.toString()));
-                String response = makePOSTRequest("http://107.170.38.31/phpDir/sendmail.php", nameValuePairs );
-                Log.d(LOGTAG,"mail php response: "+response);
+                String response = makePOSTRequest("http://107.170.38.31/phpDir/sendmail.php", nameValuePairs);
+                Log.d(LOGTAG, "mail php response: "+response);
                 if (response.equals("correo enviado")){
                     status=true;
                 }else {

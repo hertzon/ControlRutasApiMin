@@ -203,6 +203,12 @@ public class ListadoEstudiantes extends AppCompatActivity {
                 i.putExtra("ruta", ruta);
                 i.putExtra("correo",correoSeleccionado);
                 i.putExtra("telefonoAcudiente",telefonoAcudiente);
+                i.putExtra("usuario",usuario);
+                i.putExtra("strLatitud",strLatitud);
+                i.putExtra("strLongitud",strLongitud);
+
+
+
                 String ubicacion =  "http://maps.google.es/maps?q=" + strLatitud + "," + strLongitud;
                 String fecha=dia+"/"+mes+"/"+ano;
                 String hour=hora+":"+minuto;
