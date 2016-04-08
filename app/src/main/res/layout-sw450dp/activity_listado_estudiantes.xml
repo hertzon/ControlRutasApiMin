@@ -21,10 +21,10 @@
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:text="Listado de Estudiantes"
             android:id="@+id/titulo"
-            android:textSize="26dp"
+            android:textSize="22dp"
             android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true"
-            android:textColor="#3290d7" />
+            android:textColor="#0060b6" />
 
         <ExpandableListView
             android:id="@+id/lvExp"
@@ -57,7 +57,7 @@
 
             android:layout_marginTop="5dp"
             android:textSize="20dp"
-            android:textColor="#3290d7" />
+            android:textColor="#0060b6" />
 
         <EditText
             android:layout_width="match_parent"
@@ -72,7 +72,7 @@
             android:id="@+id/textView8"
             android:layout_below="@+id/editText_estudianteSeleccionado"
             android:textSize="20dp"
-            android:textColor="#3290d7"
+            android:textColor="#0060b6"
             android:text="Grado:" />
 
         <EditText
@@ -89,7 +89,7 @@
             android:id="@+id/textView9"
             android:layout_below="@+id/editText_gradoEstudiante"
             android:textSize="20dp"
-            android:textColor="#3290d7" />
+            android:textColor="#0060b6" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -98,7 +98,7 @@
             android:text="Eventos"
             android:id="@+id/textView10"
             android:textSize="20dp"
-            android:textColor="#3290d7"
+            android:textColor="#0060b6"
             android:layout_below="@+id/editText_telefonoAcudiente"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="13dp" />
@@ -109,10 +109,11 @@
             android:id="@+id/button_bajo"
             android:textSize="16dp"
             android:layout_width="match_parent"
-            android:textColor="#3290d7"
-            android:background="#ffc600"
+            android:textColor="#ffffff"
+
             android:layout_height="wrap_content"
             android:layout_below="@+id/button_subio"
+            android:background="@drawable/roundbtn"
             android:layout_marginTop="15dp" />
 
         <Button
@@ -121,12 +122,12 @@
             android:id="@+id/llamarAcudiente"
             android:textSize="16dp"
             android:layout_width="match_parent"
-            android:textColor="#3290d7"
-            android:background="#ffc600"
+            android:textColor="#ffffff"
             android:layout_height="wrap_content"
             android:layout_marginTop="15dp"
             android:layout_below="@+id/button_bajo"
             android:layout_alignParentLeft="true"
+            android:background="@drawable/roundbtn"
             android:layout_alignParentStart="true" />
 
         <Button
@@ -134,13 +135,13 @@
             android:text="Subio Ruta"
             android:id="@+id/button_subio"
             android:textSize="16sp"
-            android:textColor="#3290d7"
-            android:background="#ffc600"
+            android:textColor="#ffffff"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/textView10"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
+            android:background="@drawable/roundbtn"
             android:layout_marginTop="15dp" />
 
         <EditText
@@ -169,11 +170,11 @@
             android:id="@+id/btnNovedades"
             android:textSize="16dp"
             android:layout_width="match_parent"
-            android:textColor="#3290d7"
-            android:background="#ffc600"
+            android:textColor="#ffffff"
             android:layout_height="wrap_content"
             android:layout_marginTop="15dp"
             android:layout_below="@+id/buttonCargarDB"
+            android:background="@drawable/roundbtn"
             android:layout_centerHorizontal="true" />
 
         <TextView
@@ -182,8 +183,8 @@
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:text="Seleccione accion:"
             android:id="@+id/txtViewSeleccioneAccion"
-            android:textSize="22dp"
-            android:textColor="#3290d7"
+            android:textSize="18dp"
+            android:textColor="#0060b6"
             android:layout_below="@+id/titulo"
             android:layout_centerHorizontal="true" />
 
